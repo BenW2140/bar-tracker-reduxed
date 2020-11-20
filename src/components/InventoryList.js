@@ -22,6 +22,6 @@ function InventoryList(props) {
 
 InventoryList.propTypes = {
   brewList: PropTypes.array
-}
+};
 
 export default InventoryList;

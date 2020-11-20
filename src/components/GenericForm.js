@@ -19,7 +19,7 @@ function GenericForm(props) {
           placeholder = 'Price' />
         <input 
           type = 'number'
-          name = 'alcohol-content'
+          name = 'alcoholContent'
           placeholder = 'Alcohol Content' />
         <input 
           type = 'number'
@@ -34,6 +34,6 @@ function GenericForm(props) {
 GenericForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string
-}
+};
 
 export default GenericForm;

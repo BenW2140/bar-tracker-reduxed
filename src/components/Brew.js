@@ -23,4 +23,6 @@ Brew.propTypes = {
   alcoholContent: PropTypes.number,
   pints: PropTypes.number,
   whenBrewClicked: PropTypes.func
-}
+};
+
+export default Brew;
