@@ -47,12 +47,12 @@ class InventoryControl extends React.Component {
     let buttonText = null;
     if (this.state.selectedBrew != null) {
       currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} />
-    }
-    if (this.state.formVisibleOnPage) {
+      buttonText = "View Inventory";
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewBrewForm onNewBrewCreation = {this.handleAddingBrew} />
       buttonText = "View Inventory";
     } else {
-      currentlyVisibleState = <InventoryList brewList = {this.state.masterListOfBrews}/>
+      currentlyVisibleState = <InventoryList brewList = {this.state.masterListOfBrews} onBrewSelection = {this.handleToggleBrewDetails} />
       buttonText = "Add Brew";
     }
 

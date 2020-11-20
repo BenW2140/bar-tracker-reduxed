@@ -8,6 +8,7 @@ function InventoryList(props) {
       <hr />
       {props.brewList.map((brew) => 
       <Brew 
+        whenBrewClicked = {props.onBrewSelection}
         name = {brew.name}
         brand = {brew.brand}
         price = {brew.price}
@@ -21,7 +22,8 @@ function InventoryList(props) {
 }
 
 InventoryList.propTypes = {
-  brewList: PropTypes.array
+  brewList: PropTypes.array,
+  onBrewSelection: PropTypes.func
 };
 
 export default InventoryList;

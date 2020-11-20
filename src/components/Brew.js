@@ -6,10 +6,6 @@ function Brew(props) {
     <React.Fragment>
       <div onClick = {() => props.whenBrewClicked(props.id)}>
         <h3>Name: {props.name}</h3>
-        <h4>Brand: {props.brand}</h4>
-        <p>${props.price}</p>
-        <p>{props.alcoholContent}%</p>
-        <p>Pints: {props.pints}</p>
         <hr />
       </div>
     </React.Fragment>

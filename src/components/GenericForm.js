@@ -16,7 +16,7 @@ function GenericForm(props) {
         <input 
           type = 'number'
           name = 'price'
-          placeholder = 'Price' />
+          placeholder = 'Price per Pint' />
         <input 
           type = 'number'
           name = 'alcoholContent'
