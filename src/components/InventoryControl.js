@@ -42,11 +42,23 @@ class InventoryControl extends React.Component {
     });
   }
 
+  handleBrewRemoval = (id) => {
+    const newMasterListOfBrews = this.state.masterListOfBrews.filter(brew => brew.id !== id);
+    this.setState({
+      masterListOfBrews: newMasterListOfBrews,
+      selectedBrew: null
+    });
+  }
+
+  handleBrewSale = () => {
+    
+  }
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.selectedBrew != null) {
-      currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} />
+      currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} onClickingDelete = {this.handleBrewRemoval} />
       buttonText = "View Inventory";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewBrewForm onNewBrewCreation = {this.handleAddingBrew} />
