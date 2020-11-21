@@ -2,6 +2,7 @@ import React from "react";
 import InventoryList from "./InventoryList";
 import NewBrewForm from "./NewBrewForm";
 import BrewDetail from './BrewDetail';
+import EditBrewForm from "./EditBrewForm";
 
 class InventoryControl extends React.Component {
 
@@ -10,7 +11,8 @@ class InventoryControl extends React.Component {
     this.state = {
       formVisibleOnPage: false,
       masterListOfBrews: [],
-      selectedBrew: null
+      selectedBrew: null,
+      editing: false
     }
   }
 
@@ -18,7 +20,8 @@ class InventoryControl extends React.Component {
     if (this.state.selectedBrew != null) {
       this.setState({
         formVisibleOnPage: false,
-        selectedBrew: null
+        selectedBrew: null,
+        editing: false
       });
     } else {
       this.setState(prevState => ({
@@ -50,6 +53,23 @@ class InventoryControl extends React.Component {
     });
   }
 
+  handleEditBrew = () => {
+    this.setState({
+      editing: true
+    });
+  }
+
+  handleEditingSelectedBrew = (ticketToEdit) => {
+    const editedMasterListOfBrews = this.state.masterListOfBrews
+      .filter(brew => brew.id !== this.state.selectedBrew.id)
+      .concat(ticketToEdit);
+    this.setState({
+      masterListOfBrews: editedMasterListOfBrews,
+      selectedBrew: null,
+      editing: false
+    });
+  }
+
   handleBrewSale = () => {
     
   }
@@ -57,8 +77,11 @@ class InventoryControl extends React.Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.selectedBrew != null) {
-      currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} onClickingDelete = {this.handleBrewRemoval} />
+    if (this.state.editing) {
+      currentlyVisibleState = <EditBrewForm brew = {this.state.selectedBrew} onEditBrew = {this.handleEditingSelectedBrew} />
+      buttonText = "View Inventory";
+    } else if (this.state.selectedBrew != null) {
+      currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} onClickingDelete = {this.handleBrewRemoval} onClickingEdit = {this.handleEditBrew} />
       buttonText = "View Inventory";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewBrewForm onNewBrewCreation = {this.handleAddingBrew} />
