@@ -3,6 +3,19 @@ export const deleteBrew = id => ({
   id
 });
 
-export const toogleForm = () => ({
+export const toggleForm = () => ({
   type: 'TOGGLE_FORM'
 });
+
+export const addBrew = (brew) => {
+  const { name, brand, price, alcoholContent, pints, id } = brew;
+  return {
+    type: 'ADD_BREW',
+    name: name,
+    brand: brand,
+    price: price,
+    alcoholContent: alcoholContent,
+    pints: pints,
+    id: id
+  }
+};
