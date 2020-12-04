@@ -12,4 +12,23 @@ describe('bar tracker actions', () => {
       type: 'TOGGLE_FORM'
     });
   });
+  it('addBrew should create ADD_BREW action', () => {
+    expect(actions.addBrew(
+      {
+        name: 'brew', 
+        brand: 'home', 
+        price: 10, 
+        alcoholContent: 53, 
+        pints: 14, 
+        id: 1
+      })).toEqual({
+        type: 'ADD_BREW',
+        name: 'brew', 
+        brand: 'home', 
+        price: 10, 
+        alcoholContent: 53, 
+        pints: 14, 
+        id: 1
+    });
+  });
 });
