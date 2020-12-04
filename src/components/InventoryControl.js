@@ -11,7 +11,6 @@ class InventoryControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false,
       selectedBrew: null,
       editing: false
     }
@@ -20,14 +19,15 @@ class InventoryControl extends React.Component {
   handleClick = () => {
     if (this.state.selectedBrew != null) {
       this.setState({
-        formVisibleOnPage: false,
         selectedBrew: null,
         editing: false
       });
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage
-      }));
+      const { dispatch } = this.props;
+      const action = {
+        type: 'TOGGLE_FORM'
+      }
+      dispatch(action);
     }
   }
 
@@ -44,9 +44,10 @@ class InventoryControl extends React.Component {
       pints: pints
     }
     dispatch(action);
-    this.setState({
-      formVisibleOnPage: false
-    });
+    const action2 = {
+      type: 'TOGGLE_FORM'
+    }
+    dispatch(action2);
   }
 
   handleToggleBrewDetails = (id) => {
@@ -106,7 +107,7 @@ class InventoryControl extends React.Component {
     } else if (this.state.selectedBrew != null) {
       currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} onClickingDelete = {this.handleBrewRemoval} onClickingEdit = {this.handleEditBrew} />
       buttonText = "View Inventory";
-    } else if (this.state.formVisibleOnPage) {
+    } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewBrewForm onNewBrewCreation = {this.handleAddingBrew} />
       buttonText = "View Inventory";
     } else {
@@ -124,12 +125,14 @@ class InventoryControl extends React.Component {
 }
 
 InventoryControl.propTypes = {
-  masterListOfBrews: PropTypes.object
+  masterListOfBrews: PropTypes.object,
+  formVisibleOnPage: PropTypes.bool
 }
 
 const mapStateToProps = state => {
   return {
-    masterListOfBrews: state
+    masterListOfBrews: state.masterListOfBrews,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
