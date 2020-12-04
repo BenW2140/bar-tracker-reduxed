@@ -4,6 +4,7 @@ import NewBrewForm from "./NewBrewForm";
 import BrewDetail from './BrewDetail';
 import EditBrewForm from "./EditBrewForm";
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class InventoryControl extends React.Component {
 
@@ -49,16 +50,20 @@ class InventoryControl extends React.Component {
   }
 
   handleToggleBrewDetails = (id) => {
-    const selectedBrew = this.state.masterListOfBrews.filter(brew => brew.id === id)[0];
+    const selectedBrew = this.props.masterListOfBrews[id];
     this.setState({
       selectedBrew: selectedBrew
     });
   }
 
   handleBrewRemoval = (id) => {
-    const newMasterListOfBrews = this.state.masterListOfBrews.filter(brew => brew.id !== id);
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_BREW',
+      id: id
+    }
+    dispatch(action);
     this.setState({
-      masterListOfBrews: newMasterListOfBrews,
       selectedBrew: null
     });
   }
@@ -70,11 +75,19 @@ class InventoryControl extends React.Component {
   }
 
   handleEditingSelectedBrew = (brewToEdit) => {
-    const editedMasterListOfBrews = this.state.masterListOfBrews
-      .filter(brew => brew.id !== this.state.selectedBrew.id)
-      .concat(brewToEdit);
+    const { dispatch } = this.props;
+    const { id, name, brand, price, alcoholContent, pints } = newBrew;
+    const action = {
+      type: 'ADD_BREW',
+      id: id,
+      name: name,
+      brand: brand,
+      price: price,
+      alcoholContent: alcoholContent,
+      pints: pints
+    }
+    dispatch(action);
     this.setState({
-      masterListOfBrews: editedMasterListOfBrews,
       selectedBrew: null,
       editing: false
     });
@@ -97,7 +110,7 @@ class InventoryControl extends React.Component {
       currentlyVisibleState = <NewBrewForm onNewBrewCreation = {this.handleAddingBrew} />
       buttonText = "View Inventory";
     } else {
-      currentlyVisibleState = <InventoryList brewList = {this.state.masterListOfBrews} onBrewSelection = {this.handleToggleBrewDetails} />
+      currentlyVisibleState = <InventoryList brewList = {this.props.masterListOfBrews} onBrewSelection = {this.handleToggleBrewDetails} />
       buttonText = "Add Brew";
     }
 
@@ -110,6 +123,16 @@ class InventoryControl extends React.Component {
   }
 }
 
-InventoryControl = connect()(InventoryControl);
+InventoryControl.propTypes = {
+  masterListOfBrews: PropTypes.object
+}
+
+const mapStateToProps = state => {
+  return {
+    masterListOfBrews: state
+  }
+}
+
+InventoryControl = connect(mapStateToProps)(InventoryControl);
 
 export default InventoryControl;
