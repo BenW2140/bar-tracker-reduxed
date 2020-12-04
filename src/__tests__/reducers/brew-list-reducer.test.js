@@ -29,7 +29,7 @@ describe('brewListReducer', () => {
     };
 
     expect(brewListReducer({}, action)).toEqual({
-      [id] : {
+      [id]: {
         name: name,
         brand: brand,
         price: price,
