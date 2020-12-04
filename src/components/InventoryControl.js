@@ -3,6 +3,7 @@ import InventoryList from "./InventoryList";
 import NewBrewForm from "./NewBrewForm";
 import BrewDetail from './BrewDetail';
 import EditBrewForm from "./EditBrewForm";
+import { connect } from 'react-redux';
 
 class InventoryControl extends React.Component {
 
@@ -10,7 +11,6 @@ class InventoryControl extends React.Component {
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterListOfBrews: [],
       selectedBrew: null,
       editing: false
     }
@@ -31,9 +31,19 @@ class InventoryControl extends React.Component {
   }
 
   handleAddingBrew = (newBrew) => {
-    const newMasterListOfBrews = this.state.masterListOfBrews.concat(newBrew);
+    const { dispatch } = this.props;
+    const { id, name, brand, price, alcoholContent, pints } = newBrew;
+    const action = {
+      type: 'ADD_BREW',
+      id: id,
+      name: name,
+      brand: brand,
+      price: price,
+      alcoholContent: alcoholContent,
+      pints: pints
+    }
+    dispatch(action);
     this.setState({
-      masterListOfBrews: newMasterListOfBrews,
       formVisibleOnPage: false
     });
   }
@@ -99,5 +109,7 @@ class InventoryControl extends React.Component {
     )
   }
 }
+
+InventoryControl = connect()(InventoryControl);
 
 export default InventoryControl;

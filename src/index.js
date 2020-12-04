@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
-import reducer from './reducers/ticket-list-reducer';
+import reducer from './reducers/brew-list-reducer';
 import { Provider } from 'react-redux';
 
 const store = createStore(reducer);
