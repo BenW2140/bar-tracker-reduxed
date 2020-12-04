@@ -11,6 +11,24 @@ describe('brewListReducer', () => {
     pints: 10,
     id: 1
   };
+  const currentState = {
+    1: {
+      name: 'brew',
+      brand: 'home',
+      price: 5,
+      alcoholContent: 20,
+      pints: 10,
+      id: 1
+    },
+    2: {
+      name: 'booze',
+      brand: 'snooze',
+      price: 10,
+      alcoholContent: 40,
+      pints: 15,
+      id: 2
+    }
+  }
 
   test('Should return default stateif no action type is passed into reducer', () => {
     expect(brewListReducer({}, { type: null })).toEqual({});
@@ -36,6 +54,23 @@ describe('brewListReducer', () => {
         alcoholContent: alcoholContent,
         pints: pints,
         id: id
+      }
+    });
+  });
+
+  test('Should delete a brew', () => {
+    action = {
+      type: 'DELETE_BREW',
+      id: 1
+    };
+    expect(brewListReducer(currentState, action)).toEqual({
+      2: {
+        name: 'booze',
+        brand: 'snooze',
+        price: 10,
+        alcoholContent: 40,
+        pints: 15,
+        id: 2
       }
     });
   });
