@@ -6,7 +6,7 @@ function InventoryList(props) {
   return(
     <React.Fragment>
       <hr />
-      {props.brewList.map((brew) => 
+      {Object.values(props.brewList).map((brew) => 
       <Brew 
         whenBrewClicked = {props.onBrewSelection}
         name = {brew.name}
@@ -22,7 +22,7 @@ function InventoryList(props) {
 }
 
 InventoryList.propTypes = {
-  brewList: PropTypes.array,
+  brewList: PropTypes.object,
   onBrewSelection: PropTypes.func
 };
 

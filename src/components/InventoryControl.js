@@ -76,7 +76,7 @@ class InventoryControl extends React.Component {
 
   handleEditingSelectedBrew = (brewToEdit) => {
     const { dispatch } = this.props;
-    const { id, name, brand, price, alcoholContent, pints } = newBrew;
+    const { id, name, brand, price, alcoholContent, pints } = brewToEdit;
     const action = {
       type: 'ADD_BREW',
       id: id,
