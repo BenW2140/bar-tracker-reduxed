@@ -5,6 +5,7 @@ import BrewDetail from './BrewDetail';
 import EditBrewForm from "./EditBrewForm";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as a from '../actions';
 
 class InventoryControl extends React.Component {
 
@@ -24,29 +25,16 @@ class InventoryControl extends React.Component {
       });
     } else {
       const { dispatch } = this.props;
-      const action = {
-        type: 'TOGGLE_FORM'
-      }
+      const action = a.toggleForm;
       dispatch(action);
     }
   }
 
   handleAddingBrew = (newBrew) => {
     const { dispatch } = this.props;
-    const { id, name, brand, price, alcoholContent, pints } = newBrew;
-    const action = {
-      type: 'ADD_BREW',
-      id: id,
-      name: name,
-      brand: brand,
-      price: price,
-      alcoholContent: alcoholContent,
-      pints: pints
-    }
+    const action = a.addBrew;
     dispatch(action);
-    const action2 = {
-      type: 'TOGGLE_FORM'
-    }
+    const action2 = a.toggleForm;
     dispatch(action2);
   }
 
@@ -59,10 +47,7 @@ class InventoryControl extends React.Component {
 
   handleBrewRemoval = (id) => {
     const { dispatch } = this.props;
-    const action = {
-      type: 'DELETE_BREW',
-      id: id
-    }
+    const action = a.deleteBrew;
     dispatch(action);
     this.setState({
       selectedBrew: null
@@ -78,15 +63,7 @@ class InventoryControl extends React.Component {
   handleEditingSelectedBrew = (brewToEdit) => {
     const { dispatch } = this.props;
     const { id, name, brand, price, alcoholContent, pints } = brewToEdit;
-    const action = {
-      type: 'ADD_BREW',
-      id: id,
-      name: name,
-      brand: brand,
-      price: price,
-      alcoholContent: alcoholContent,
-      pints: pints
-    }
+    const action = a.addBrew;
     dispatch(action);
     this.setState({
       selectedBrew: null,

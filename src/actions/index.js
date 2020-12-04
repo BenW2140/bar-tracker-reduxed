@@ -1,16 +1,18 @@
+import * as c from './ActionTypes'
+
 export const deleteBrew = id => ({
-  type: 'DELETE_BREW',
+  type: c.DELETE_BREW,
   id
 });
 
 export const toggleForm = () => ({
-  type: 'TOGGLE_FORM'
+  type: c.TOGGLE_FORM
 });
 
 export const addBrew = (brew) => {
   const { name, brand, price, alcoholContent, pints, id } = brew;
   return {
-    type: 'ADD_BREW',
+    type: c.ADD_BREW,
     name: name,
     brand: brand,
     price: price,

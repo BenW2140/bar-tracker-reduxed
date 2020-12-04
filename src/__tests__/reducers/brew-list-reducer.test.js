@@ -1,4 +1,5 @@
 import brewListReducer from '../../reducers/brew-list-reducer';
+import * as c from '../../actions/ActionTypes';
 
 describe('brewListReducer', () => {
 
@@ -37,7 +38,7 @@ describe('brewListReducer', () => {
   test('Should add new brew data to brew list', () => {
     const { name, brand, price, alcoholContent, pints, id } = brewData;
     action = {
-      type: 'ADD_BREW',
+      type: c.ADD_BREW,
       name: name,
       brand: brand,
       price: price,
@@ -60,7 +61,7 @@ describe('brewListReducer', () => {
 
   test('Should delete a brew', () => {
     action = {
-      type: 'DELETE_BREW',
+      type: c.DELETE_BREW,
       id: 1
     };
     expect(brewListReducer(currentState, action)).toEqual({

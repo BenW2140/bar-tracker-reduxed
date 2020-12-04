@@ -2,6 +2,7 @@ import rootReducer from '../../reducers/index';
 import { createStore } from 'redux';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
 import brewListReducer from '../../reducers/brew-list-reducer';
+import * as c from '../../actions/ActionTypes';
 
 let store = createStore(rootReducer);
 
@@ -23,7 +24,7 @@ describe('rootReducer', () => {
 
   test('Check that ADD_BREW action works for brewListReducer and root reducer', () => {
     const action = {
-      type: 'ADD_BREW',
+      type: c.ADD_BREW,
       name: 'brew',
       brand: 'home',
       price: 10,
@@ -37,7 +38,7 @@ describe('rootReducer', () => {
   
   test('Check that TOGGLE_FORM action works for formVisibleReducer and root reducer', () => {
     const action = {
-      type: 'TOGGLE_FORM'
+      type: c.TOGGLE_FORM
     }
     store.dispatch(action);
     expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
