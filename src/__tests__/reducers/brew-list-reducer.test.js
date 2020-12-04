@@ -31,7 +31,7 @@ describe('brewListReducer', () => {
     }
   }
 
-  test('Should return default stateif no action type is passed into reducer', () => {
+  test('Should return default state if no action type is passed into reducer', () => {
     expect(brewListReducer({}, { type: null })).toEqual({});
   });
 

@@ -25,16 +25,16 @@ class InventoryControl extends React.Component {
       });
     } else {
       const { dispatch } = this.props;
-      const action = a.toggleForm;
+      const action = a.toggleForm();
       dispatch(action);
     }
   }
 
   handleAddingBrew = (newBrew) => {
     const { dispatch } = this.props;
-    const action = a.addBrew;
+    const action = a.addBrew(newBrew);
     dispatch(action);
-    const action2 = a.toggleForm;
+    const action2 = a.toggleForm();
     dispatch(action2);
   }
 
@@ -47,7 +47,7 @@ class InventoryControl extends React.Component {
 
   handleBrewRemoval = (id) => {
     const { dispatch } = this.props;
-    const action = a.deleteBrew;
+    const action = a.deleteBrew(id);
     dispatch(action);
     this.setState({
       selectedBrew: null
@@ -62,8 +62,7 @@ class InventoryControl extends React.Component {
 
   handleEditingSelectedBrew = (brewToEdit) => {
     const { dispatch } = this.props;
-    const { id, name, brand, price, alcoholContent, pints } = brewToEdit;
-    const action = a.addBrew;
+    const action = a.addBrew(brewToEdit);
     dispatch(action);
     this.setState({
       selectedBrew: null,
@@ -82,7 +81,7 @@ class InventoryControl extends React.Component {
       currentlyVisibleState = <EditBrewForm brew = {this.state.selectedBrew} onEditBrew = {this.handleEditingSelectedBrew} />
       buttonText = "View Inventory";
     } else if (this.state.selectedBrew != null) {
-      currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} onClickingDelete = {this.handleBrewRemoval} onClickingEdit = {this.handleEditBrew} />
+      currentlyVisibleState = <BrewDetail brew = {this.state.selectedBrew} onClickingDelete = {this.handleBrewRemoval} onClickingEdit = {this.handleEditBrew} onClickingSell = {this.handleBrewSale} />
       buttonText = "View Inventory";
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewBrewForm onNewBrewCreation = {this.handleAddingBrew} />
