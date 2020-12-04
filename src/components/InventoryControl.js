@@ -59,10 +59,10 @@ class InventoryControl extends React.Component {
     });
   }
 
-  handleEditingSelectedBrew = (ticketToEdit) => {
+  handleEditingSelectedBrew = (brewToEdit) => {
     const editedMasterListOfBrews = this.state.masterListOfBrews
       .filter(brew => brew.id !== this.state.selectedBrew.id)
-      .concat(ticketToEdit);
+      .concat(brewToEdit);
     this.setState({
       masterListOfBrews: editedMasterListOfBrews,
       selectedBrew: null,
